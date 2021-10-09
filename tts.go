@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/bmizerany/aws4"
-	"io/ioutil"
+	"io"
 	"net/http"
+
+	"github.com/bmizerany/aws4"
 )
 
 const api = "https://polly.us-west-2.amazonaws.com"
@@ -52,6 +53,7 @@ const (
 	Karl      = "Karl"
 	Carla     = "Carla"
 	Giorgio   = "Giorgio"
+	Bianca    = "Bianca"
 	Mizuki    = "Mizuki"
 	Liv       = "Liv"
 	Lotte     = "Lotte"
@@ -154,7 +156,7 @@ func (tts *TTS) Speech(text string) (data []byte, err error) {
 		err = res.Body.Close()
 	}()
 
-	data, err = ioutil.ReadAll(res.Body)
+	data, err = io.ReadAll(res.Body)
 
 	if err != nil {
 		return []byte{}, err
